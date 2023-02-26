@@ -9,7 +9,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
 
@@ -20,10 +21,12 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
       vsync: this,
       duration: const Duration(seconds: 5),
     );
-    _animation = Tween<double>(begin: 0, end: 2 * pi).animate(_animationController);
+    _animation =
+        Tween<double>(begin: 0, end: 2 * pi).animate(_animationController);
     _animationController.repeat(
         // reverse: true,
         );
+    _animationController.stop();
   }
 
   @override
@@ -45,48 +48,72 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedBuilder(
-                animation: _animation,
-                builder: (context, child) {
-                  return Transform(
+              animation: _animation,
+              builder: (context, child) {
+                return Transform(
+                  alignment: Alignment.center,
+                  // origin: const Offset(100, 100),
+                  transform: Matrix4.identity()
+                    ..rotateZ(
+                      _animation.value,
+                    ),
+                  // ..rotateX(
+                  //   _animation.value,
+                  // )
+                  // ..rotateY(
+                  //   _animation.value,
+                  // ),
+                  child: Container(
+                    width: 200,
+                    height: 200,
                     alignment: Alignment.center,
-                    // origin: const Offset(100, 100),
-                    transform: Matrix4.identity()
-                      ..rotateZ(
-                        _animation.value,
-                      ),
-                    // ..rotateX(
-                    //   _animation.value,
-                    // )
-                    // ..rotateY(
-                    //   _animation.value,
-                    // ),
-                    child: Container(
-                      width: 200,
-                      height: 200,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        color: Colors.cyan,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(.5),
-                            spreadRadius: 10,
-                            blurRadius: 15,
-                            offset: const Offset(0, 2),
-                          )
-                        ],
-                      ),
-                      child: const Text(
-                        "Hello world!",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: Colors.cyan,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(.5),
+                          spreadRadius: 10,
+                          blurRadius: 15,
+                          offset: const Offset(0, 2),
+                        )
+                      ],
+                    ),
+                    child: const Text(
+                      "Hello world!",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
                       ),
                     ),
-                  );
-                })
+                  ),
+                );
+              },
+            ),
+            SizedBox(
+              height: 100,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                _animation = Tween<double>(begin: 0, end: 2 * pi)
+                    .animate(_animationController);
+                _animationController.repeat(
+                    // reverse: true,
+                    );
+              },
+              child: Text(
+                "Start",
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                _animationController.stop();
+              },
+              child: Text(
+                "Stop",
+              ),
+            ),
           ],
         ),
       ),
