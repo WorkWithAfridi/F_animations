@@ -2,32 +2,30 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class MyHomePageOne extends StatefulWidget {
-  const MyHomePageOne({super.key});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
   @override
-  State<MyHomePageOne> createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePageOne> with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
-
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 5),
     );
-
-    _animation = Tween<double>(begin: 0, end: 2 * pi).animate(_animationController);
-
+    _animation =
+        Tween<double>(begin: 0, end: 2 * pi).animate(_animationController);
     _animationController.repeat(
-        // reverse: true,
-        );
-
+      // reverse: true,
+    );
     _animationController.stop();
   }
 
@@ -93,17 +91,18 @@ class _MyHomePageState extends State<MyHomePageOne> with SingleTickerProviderSta
                 );
               },
             ),
-            const SizedBox(
+            SizedBox(
               height: 100,
             ),
             ElevatedButton(
               onPressed: () {
-                _animation = Tween<double>(begin: 0, end: 2 * pi).animate(_animationController);
+                _animation = Tween<double>(begin: 0, end: 2 * pi)
+                    .animate(_animationController);
                 _animationController.repeat(
-                    // reverse: true,
-                    );
+                  // reverse: true,
+                );
               },
-              child: const Text(
+              child: Text(
                 "Start",
               ),
             ),
@@ -111,7 +110,7 @@ class _MyHomePageState extends State<MyHomePageOne> with SingleTickerProviderSta
               onPressed: () {
                 _animationController.stop();
               },
-              child: const Text(
+              child: Text(
                 "Stop",
               ),
             ),
