@@ -9,11 +9,6 @@ class MyHomePageTwo extends StatefulWidget {
   State<MyHomePageTwo> createState() => _MyHomePageState();
 }
 
-enum CircleSide {
-  left,
-  right,
-}
-
 class _MyHomePageState extends State<MyHomePageTwo> with TickerProviderStateMixin {
   late AnimationController _counterClockwiseRotationController;
   late Animation<double> _counterClockwiseRotationAnimation;
@@ -233,6 +228,12 @@ class _MyHomePageState extends State<MyHomePageTwo> with TickerProviderStateMixi
     );
   }
 }
+
+enum CircleSide {
+  left,
+  right,
+}
+
 
 extension ToPath on CircleSide {
   Path toPath(Size size) {

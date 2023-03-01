@@ -1,3 +1,7 @@
+
+import 'dart:developer';
+
+import 'package:f_animations/screens/page_three.dart';
 import 'package:f_animations/screens/page_two.dart';
 import 'package:flutter/material.dart';
 
@@ -11,11 +15,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    log("Building");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
-      home: const MyHomePageTwo(),
+      home: const MyHomePageThree(),
     );
   }
 }
